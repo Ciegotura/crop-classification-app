@@ -42,15 +42,15 @@ The classify function allows you to classify an agricultural area based on given
 
 ### Function arguments:
 
-    cords (required): Coordinates of the center of the bounding box to be classified, in the form [latitude, longitude].
+cords (required): Coordinates of the center of the bounding box to be classified, in the form [latitude, longitude].
 
-    generate_crops_plot (optional): True/False flag, default is False. Setting it to True generates a plot of crop area in selected years.
+generate_crops_plot (optional): True/False flag, default is False. Setting it to True generates a plot of crop area in selected years.
 
-    start_date (optional): Start date of the Sentinel image, default '2024-06-30'. It is best not to change to maintain consistency of results.
+start_date (optional): Start date of the Sentinel image, default '2024-06-30'. It is best not to change to maintain consistency of results.
 
-    stop_date (optional): End date of the Sentinel image, default '2024-07-01'. Change not recommended.
+stop_date (optional): End date of the Sentinel image, default '2024-07-01'. Change not recommended.
 
-    cloudy_pixel_percentage (optional): The percentage of cloud content in the image, default is 100. This allows you to limit images with a lot of clouds, but to ensure classification accuracy it is best to leave this value unchanged.
+cloudy_pixel_percentage (optional): The percentage of cloud content in the image, default is 100. This allows you to limit images with a lot of clouds, but to ensure classification accuracy it is best to leave this value unchanged.
 
 ### Examples of using the function
 
@@ -82,9 +82,9 @@ generate_plot(crop_plot)
 
 The classify function works in two layers:
 
-    Bottom layer (SAR): SAR data from 2015-2023 is used for preliminary classification, for the designated growing season.
+Bottom layer (SAR): SAR data from 2015-2023 is used for preliminary classification, for the designated growing season.
 
-    Top layer (SAR+optical): Classification based on the Sentinel image from the current year (2024) allows for up-to-date crop mapping.
+Top layer (SAR+optical): Classification based on the Sentinel image from the current year (2024) allows for up-to-date crop mapping.
 
 Each layer uses a training model adapted to the region specification and data type (SAR or SAR+optical). Classification maps are created for each period, and when the generate_crop_plot is turned on, the function generates additional crop area data.
 Legending the map
@@ -92,9 +92,9 @@ Legending the map
 The resulting map includes a legend describing the crop classes, making it easier to interpret the classification results.
 Additional information
 
-    Users can customize image dates and the cloudy_pixel_percentage parameter, although the default values ​​provide the best classification quality for the default region selected.
+Users can customize image dates and the cloudy_pixel_percentage parameter, although the default values ​​provide the best classification quality for the default region selected.
 
-    In case of problems with visualization, make sure that Jupyter Notebook has an active cropenv environment as the kernel.
+In case of problems with visualization, make sure that Jupyter Notebook has an active cropenv environment as the kernel.
 
 
 ## Accuracy function
@@ -103,11 +103,11 @@ The accurency function allows you to calculate and visualize the classification 
 
 ### Function arguments:
 
-    start_date (optional): Start date of the Sentinel image, default '2024-06-30'. Specifies the period from which the data used for accuracy calculations comes from. It is recommended to leave this default value.
+start_date (optional): Start date of the Sentinel image, default '2024-06-30'. Specifies the period from which the data used for accuracy calculations comes from. It is recommended to leave this default value.
 
-    stop_date (optional): End date of the Sentinel image, default '2024-07-01'. In combination with start_date, defines the time range of Sentinel data.
+stop_date (optional): End date of the Sentinel image, default '2024-07-01'. In combination with start_date, defines the time range of Sentinel data.
 
-    cloudy_pixel_percentage (optional): Percentage of the maximum amount of clouds in the image, default is 100. Changing this parameter allows you to select images with less clouds, but it is best to leave the default value.
+cloudy_pixel_percentage (optional): Percentage of the maximum amount of clouds in the image, default is 100. Changing this parameter allows you to select images with less clouds, but it is best to leave the default value.
 
 ### Example of using the function
 
@@ -119,25 +119,25 @@ Map, hist = accuracy()
 
 ### The function returns:
 
-    Map: Map with layers showing:
-        crops_raster - original training data,
-        points - training points (invisible by default),
-        classified - model classification results,
-        accurency - a mask with correct and incorrect classification areas, where correctly classified pixels are marked and incorrectly classified pixels are not masked.
+Map: Map with layers showing:
+crops_raster - original training data,
+points - training points (invisible by default),
+classified - model classification results,
+accurency - a mask with correct and incorrect classification areas, where correctly classified pixels are marked and incorrectly classified pixels are not masked.
 
-    hist: A histogram showing the number of pixels classified correctly and incorrectly.
+hist: A histogram showing the number of pixels classified correctly and incorrectly.
 
 ### Description of how the function works
 
-    Basemap Creation: Prepares a basemap for the area with coordinates [52.68, 18.28] used for visualization.
+Basemap Creation: Prepares a basemap for the area with coordinates [52.68, 18.28] used for visualization.
 
-    Preparing data for classification: Selects image data for a given area, applying settings for the region, including Sentinel optical images.
+Preparing data for classification: Selects image data for a given area, applying settings for the region, including Sentinel optical images.
 
-    Calculating classification accuracy:
-        Creates an equal_mask that indicates correctly classified pixels (pixels where the classes in the classification image match the original crop raster).
-        Map adds an accurency mask to show the results of correct classification.
+Calculating classification accuracy:
+Creates an equal_mask that indicates correctly classified pixels (pixels where the classes in the classification image match the original crop raster).
+Map adds an accurency mask to show the results of correct classification.
 
-    Histogram Generation: The histogram contains the number of pixels classified correctly and incorrectly, which allows you to evaluate the overall classification accuracy.
+Histogram Generation: The histogram contains the number of pixels classified correctly and incorrectly, which allows you to evaluate the overall classification accuracy.
 
 The histogram can be displayed immediately after calling the function or exported for further analysis.
 
@@ -148,18 +148,18 @@ The classify_crop function allows you to visualize the frequency of occurrence o
 
 ### Function arguments:
 
-    cords (required): Coordinates of the center of the area in the form of a bounding box [latitude, longitude].
+cords (required): Coordinates of the center of the area in the form of a bounding box [latitude, longitude].
 
-    crop_key (required): Name of the crop whose occurrence we want to investigate. Available crops are:
-        'Rapeseed', 'Winter wheat', 'Sugar beet', 'Corn', 'Spring barley', 'Potatoes', 'Spring onion', 'Soil', 'Broccoli', 'Oats', 'Winter onion', ' Garlic', 'Trees', 'Pumpkin', 'Phacelia', 'Beans', 'Peas', 'Green peas', 'Winter barley', 'Dill', 'Alfalfa', 'Parsley', 'Rye with barley' , 'Celery', 'Soy', 'Grass', 'Rye'.
+crop_key (required): Name of the crop whose occurrence we want to investigate. Available crops are:
+    'Rapeseed', 'Winter wheat', 'Sugar beet', 'Corn', 'Spring barley', 'Potatoes', 'Spring onion', 'Soil', 'Broccoli', 'Oats', 'Winter onion', ' Garlic', 'Trees', 'Pumpkin', 'Phacelia', 'Beans', 'Peas', 'Green peas', 'Winter barley', 'Dill', 'Alfalfa', 'Parsley', 'Rye with barley' , 'Celery', 'Soy', 'Grass', 'Rye'.
 
-    color (required): The color code in HEX format (e.g. 'b3573b') that will be used to visualize the selected crop on the map. The function generates lighter shades of this color to indicate different frequency levels.
+color (required): The color code in HEX format (e.g. 'b3573b') that will be used to visualize the selected crop on the map. The function generates lighter shades of this color to indicate different frequency levels.
 
-    start_date (optional): Start date for Sentinel data, default '2024-06-30'. For consistency of results, it is recommended not to change this parameter.
+start_date (optional): Start date for Sentinel data, default '2024-06-30'. For consistency of results, it is recommended not to change this parameter.
 
-    stop_date (optional): End date for Sentinel data, default '2024-07-01'. Again, it's best to leave the default value.
+stop_date (optional): End date for Sentinel data, default '2024-07-01'. Again, it's best to leave the default value.
 
-    cloudy_pixel_percentage (optional): Maximum percentage of clouds in images. The default value is 100.
+cloudy_pixel_percentage (optional): Maximum percentage of clouds in images. The default value is 100.
 
 ### Example of using the function
 
@@ -172,18 +172,18 @@ Map = classify_crop([52.68, 18.28], 'Sugar beet', 'b3573b')
 The result will be a Map with a layer showing the frequency of the selected crop (Sugar beet) in the indicated area, with a color gradient from the lightest to the most saturated shade of the HEX b3573b color.
 Description of how the function works
 
-    Data and classifier preparation:
-        Initializes the map for cords coordinates.
-        Loads a classification model based on optical and SAR data to include both current and historical image data.
+Data and classifier preparation:
+Initializes the map for cords coordinates.
+Loads a classification model based on optical and SAR data to include both current and historical image data.
 
-    Cultivation frequency classification:
-        Based on selected historical dates (2015-2023) and current data from 2024, the function iterates through Sentinel images and creates a sum of layers, which allows you to estimate the frequency of occurrence of the selected crop in a given area.
-        A classification is added to each layer according to the ID of the selected crop.
+Cultivation frequency classification:
+Based on selected historical dates (2015-2023) and current data from 2024, the function iterates through Sentinel images and creates a sum of layers, which allows you to estimate the frequency of occurrence of the selected crop in a given area.
+A classification is added to each layer according to the ID of the selected crop.
 
-    Result visualization:
-        The resulting map contains a result layer that shows the frequency of the selected crop.
-        Uses shades of color (provided by the user) to indicate different frequency levels.
-        A legend for the color gradient is generated on the map, making the data easier to interpret.
+Result visualization:
+The resulting map contains a result layer that shows the frequency of the selected crop.
+Uses shades of color (provided by the user) to indicate different frequency levels.
+A legend for the color gradient is generated on the map, making the data easier to interpret.
 
 
 ## crop_index function
@@ -192,15 +192,15 @@ The crop_index function generates a monoculture index map for the selected area,
 
 ### Function arguments:
 
-    cords (required): Coordinates of the center of the area in the format [latitude, longitude].
+cords (required): Coordinates of the center of the area in the format [latitude, longitude].
 
-    color (required): HEX color, e.g. '445d07', used to visualize the index on the map. The function generates light shades of this color, creating a gradient to visualize different levels of the monoculture index.
+color (required): HEX color, e.g. '445d07', used to visualize the index on the map. The function generates light shades of this color, creating a gradient to visualize different levels of the monoculture index.
 
-    start_date (optional): Start date of the Sentinel image for assessing the current crop status, default '2024-06-30'. It is recommended to leave this value unchanged.
+start_date (optional): Start date of the Sentinel image for assessing the current crop status, default '2024-06-30'. It is recommended to leave this value unchanged.
 
-    stop_date (optional): End date of the Sentinel image, default '2024-07-01'.
+stop_date (optional): End date of the Sentinel image, default '2024-07-01'.
 
-    cloudy_pixel_percentage (optional): Maximum percentage of clouds in the selected image. Defaults to 100, can be changed to reduce the amount of clouds in the image.
+cloudy_pixel_percentage (optional): Maximum percentage of clouds in the selected image. Defaults to 100, can be changed to reduce the amount of clouds in the image.
 
 ### Example of using the function
 
@@ -214,16 +214,16 @@ The function returns a Map map with a monoculture index layer, which shows the m
 Description of how the function works
 
 Preparation of the map and classifier:
-        Initializes the map for cords coordinates.
-        It loads a classification model based on Sentinel optical data and then analyzes the current crop.
+Initializes the map for cords coordinates.
+It loads a classification model based on Sentinel optical data and then analyzes the current crop.
 
-    Creating a monoculture index:
-        The function processes historical data (from 2015 to 2023) to calculate crop variability over time.
-        It compares subsequent SAR images from selected years and determines crop variability based on the differences between subsequent classifications.
-        For each change in cultivation (i.e. switching to a different type of cultivation), the function increases the index by a specific value, which translates into a higher variability index (lower monoculture index).
+Creating a monoculture index:
+The function processes historical data (from 2015 to 2023) to calculate crop variability over time.
+It compares subsequent SAR images from selected years and determines crop variability based on the differences between subsequent classifications.
+For each change in cultivation (i.e. switching to a different type of cultivation), the function increases the index by a specific value, which translates into a higher variability index (lower monoculture index).
 
-    Index visualization:
-        The map contains a layer with a color gradient corresponding to the monoculture index values, making monoculture and rotation fields easily distinguishable.
-        Creates a monoculture index legend that helps interpret index values ​​on the map - a value of 1 indicates full monoculture and 0.1 indicates full crop rotation.
+Index visualization:
+The map contains a layer with a color gradient corresponding to the monoculture index values, making monoculture and rotation fields easily distinguishable.
+Creates a monoculture index legend that helps interpret index values ​​on the map - a value of 1 indicates full monoculture and 0.1 indicates full crop rotation.
 
 The function allows you to quickly assess which fields are subject to crop rotation and which are monocultured, which is important for assessing biodiversity and soil health in a given region.
